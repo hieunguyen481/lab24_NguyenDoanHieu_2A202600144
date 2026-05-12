@@ -1,0 +1,16 @@
+{
+  "kappa": 1.0,
+  "interpretation": "Almost perfect agreement — hiếm gặp",
+  "n_samples": 10,
+  "raw_agreement": "10/10",
+  "human_distribution": {
+    "Tie": 1,
+    "B": 8,
+    "A": 1
+  },
+  "judge_distribution": {
+    "Tie": 1,
+    "B": 8,
+    "A": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "pairwise": {
+    "a_wins": 0,
+    "b_wins": 8,
+    "ties": 22,
+    "total": 30,
+    "b_win_rate": 0.2667
+  },
+  "absolute": {
+    "baseline_avg": {
+      "correctness": 4.5,
+      "completeness": 4.13,
+      "relevance": 5.0,
+      "coherence": 4.67,
+      "overall": 4.37
+    },
+    "production_avg": {
+      "correctness": 4.37,
+      "completeness": 4.2,
+      "relevance": 4.53,
+      "coherence": 4.5,
+      "overall": 4.37
+    }
+  },
+  "bias_mitigation": {
+    "avg_bias_delta": 0.1,
+    "swap_results_count": 30
+  },
+  "cohen_kappa": {
+    "kappa": 0.1566,
+    "agreement": "slight",
+    "n": 10,
+    "accuracy": 0.3
+  }
+}

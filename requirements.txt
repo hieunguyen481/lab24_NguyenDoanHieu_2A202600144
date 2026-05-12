@@ -8,3 +8,7 @@ flashrank
 pytest
 python-dotenv
 openai
+langchain-openai
+presidio-analyzer
+presidio-anonymizer
+scikit-learn

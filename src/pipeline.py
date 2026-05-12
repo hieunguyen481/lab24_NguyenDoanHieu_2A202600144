@@ -50,8 +50,24 @@ def build_pipeline():
     return search, reranker
 
 
-def run_query(query: str, search: HybridSearch, reranker: CrossEncoderReranker) -> tuple[str, list[str]]:
-    """Run single query through pipeline."""
+def run_query(query: str, search: HybridSearch, reranker: CrossEncoderReranker,
+              enable_guardrails: bool = False) -> tuple[str, list[str]]:
+    """Run single query through pipeline with optional guardrails."""
+    # Pre-query guardrails
+    if enable_guardrails:
+        try:
+            from src.m7_guardrails import detect_pii, validate_topic, check_content_safety, redact_pii
+            # Check input safety
+            safety = check_content_safety(query)
+            if not safety.passed:
+                return f"⚠️ Query blocked: {safety.message}", []
+            # Check topic
+            topic = validate_topic(query)
+            if not topic.passed:
+                return f"⚠️ Off-topic query: {topic.message}", []
+        except ImportError:
+            pass
+
     results = search.search(query)
     docs = [{"text": r.text, "score": r.score, "metadata": r.metadata} for r in results]
     reranked = reranker.rerank(query, docs, top_k=RERANK_TOP_K)
@@ -70,7 +86,17 @@ def run_query(query: str, search: HybridSearch, reranker: CrossEncoderReranker) 
         answer = resp.choices[0].message.content
     except Exception:
         answer = contexts[0] if contexts else "Không tìm thấy thông tin."
+
+    # Post-response guardrails
+    if enable_guardrails:
+        try:
+            from src.m7_guardrails import redact_pii
+            answer = redact_pii(answer)
+        except ImportError:
+            pass
+
     return answer, contexts
+
 
 
 def evaluate_pipeline(search: HybridSearch, reranker: CrossEncoderReranker):

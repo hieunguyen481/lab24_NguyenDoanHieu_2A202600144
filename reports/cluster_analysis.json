@@ -1,0 +1,45 @@
+{
+  "total_questions": 52,
+  "overall_scores": {
+    "faithfulness": 0.7191,
+    "answer_relevancy": 0.7159,
+    "context_precision": 0.8512,
+    "context_recall": 0.7949
+  },
+  "clusters": {
+    "retrieval_gap": {
+      "count": 17,
+      "avg_score": 0.3725,
+      "worst_question": "Nghị định 13 có quy định về xử lý dữ liệu cá nhân của động vật không?",
+      "worst_score": 0.0,
+      "pct_of_total": 32.7
+    },
+    "precision_noise": {
+      "count": 14,
+      "avg_score": 0.5065,
+      "worst_question": "Thời tiết ngày mai ở Hà Nội thế nào?",
+      "worst_score": 0.0,
+      "pct_of_total": 26.9
+    },
+    "hallucination": {
+      "count": 23,
+      "avg_score": 0.3781,
+      "worst_question": "Thuế GTGT của hàng hóa mua vào trong kỳ là bao nhiêu?",
+      "worst_score": 0.0,
+      "pct_of_total": 44.2
+    },
+    "irrelevance": {
+      "count": 12,
+      "avg_score": 0.2595,
+      "worst_question": "Hàng hóa bán ra chịu thuế suất 10% có giá trị bao nhiêu?",
+      "worst_score": 0.0,
+      "pct_of_total": 23.1
+    }
+  },
+  "recommendations": [
+    "32.7% questions have retrieval gaps. Consider: improve chunking, add BM25, increase RERANK_TOP_K.",
+    "26.9% questions have noisy context. Consider: stricter reranking, metadata filtering.",
+    "44.2% questions show hallucination. Consider: tighter prompt, lower temperature, add citations.",
+    "23.1% questions have irrelevant answers. Consider: improve prompt template, add query rewriting."
+  ]
+}

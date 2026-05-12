@@ -33,3 +33,31 @@ RERANK_TOP_K = 7
 # --- Paths ---
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 TEST_SET_PATH = os.path.join(os.path.dirname(__file__), "test_set.json")
+ADVERSARIAL_TEST_SET_PATH = os.path.join(os.path.dirname(__file__), "adversarial_test_set.json")
+HUMAN_ANNOTATIONS_PATH = os.path.join(os.path.dirname(__file__), "human_annotations.json")
+
+# --- Lab 24: Guardrails ---
+ALLOWED_TOPICS = [
+    "pháp luật", "thuế", "dữ liệu cá nhân", "tài chính",
+    "bảo vệ dữ liệu", "nghị định", "quy định", "doanh nghiệp",
+    "kế toán", "báo cáo tài chính", "GTGT", "VAT",
+]
+PII_PATTERNS_VN = {
+    "CCCD": r"\b\d{12}\b",
+    "PHONE_VN": r"\b(0[3|5|7|8|9])\d{8}\b",
+    "MST": r"\b\d{10}(-\d{3})?\b",
+}
+
+# --- Lab 24: LLM-Judge ---
+JUDGE_MODEL = "gpt-4o-mini"
+JUDGE_CRITERIA = ["correctness", "completeness", "relevance", "coherence"]
+
+# --- Lab 24: SLO Thresholds ---
+SLO = {
+    "faithfulness": 0.90,
+    "answer_relevancy": 0.85,
+    "context_precision": 0.80,
+    "context_recall": 0.90,
+    "p95_latency_s": 3.0,
+    "pii_leak_rate": 0.0,
+}

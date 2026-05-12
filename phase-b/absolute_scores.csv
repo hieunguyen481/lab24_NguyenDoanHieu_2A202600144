@@ -1,0 +1,61 @@
+question,model,correctness,completeness,relevance,coherence,overall
+Nghị định 13/2023/NĐ-CP quy định về vấn đề gì?,baseline,5,5,5,5,5
+Nghị định 13/2023/NĐ-CP quy định về vấn đề gì?,production,5,4,5,5,5
+Nghị định 13/2023/NĐ-CP áp dụng cho những đối tượng nào?,baseline,5,5,5,5,5
+Nghị định 13/2023/NĐ-CP áp dụng cho những đối tượng nào?,production,5,5,5,5,5
+"Theo Nghị định 13, dữ liệu cá nhân là gì?",baseline,5,5,5,5,5
+"Theo Nghị định 13, dữ liệu cá nhân là gì?",production,4,4,5,4,4
+Dữ liệu cá nhân gồm những nhóm nào?,baseline,5,5,5,5,5
+Dữ liệu cá nhân gồm những nhóm nào?,production,5,4,5,5,5
+Dữ liệu cá nhân cơ bản gồm những thông tin nào?,baseline,5,5,5,5,5
+Dữ liệu cá nhân cơ bản gồm những thông tin nào?,production,4,3,5,4,4
+Dữ liệu cá nhân nhạy cảm theo Nghị định 13 bao gồm những loại nào?,baseline,5,5,5,5,5
+Dữ liệu cá nhân nhạy cảm theo Nghị định 13 bao gồm những loại nào?,production,3,3,3,3,3
+Chủ thể dữ liệu có những quyền gì theo Điều 9 Nghị định 13?,baseline,5,5,5,5,5
+Chủ thể dữ liệu có những quyền gì theo Điều 9 Nghị định 13?,production,3,3,3,3,3
+Quyền đồng ý của chủ thể dữ liệu được hiểu như thế nào?,baseline,5,5,5,5,5
+Quyền đồng ý của chủ thể dữ liệu được hiểu như thế nào?,production,5,5,5,5,5
+Sự đồng ý của chủ thể dữ liệu chỉ có hiệu lực khi nào?,baseline,5,5,5,5,5
+Sự đồng ý của chủ thể dữ liệu chỉ có hiệu lực khi nào?,production,5,5,5,5,5
+Chủ thể dữ liệu có nghĩa vụ gì theo Nghị định 13?,baseline,5,5,5,5,5
+Chủ thể dữ liệu có nghĩa vụ gì theo Nghị định 13?,production,4,3,5,4,4
+Việc thông báo xử lý dữ liệu cá nhân phải được thực hiện khi nào?,baseline,5,5,5,5,5
+Việc thông báo xử lý dữ liệu cá nhân phải được thực hiện khi nào?,production,5,5,5,5,5
+Khi nào có thể xử lý dữ liệu cá nhân mà không cần sự đồng ý của chủ thể dữ liệu?,baseline,5,5,5,5,5
+Khi nào có thể xử lý dữ liệu cá nhân mà không cần sự đồng ý của chủ thể dữ liệu?,production,3,3,3,3,3
+Việc xử lý dữ liệu cá nhân của trẻ em cần điều kiện gì?,baseline,5,5,5,5,5
+Việc xử lý dữ liệu cá nhân của trẻ em cần điều kiện gì?,production,5,5,5,5,5
+"Khi phát hiện vi phạm quy định bảo vệ dữ liệu cá nhân, phải thông báo trong thời hạn bao lâu?",baseline,5,5,5,5,5
+"Khi phát hiện vi phạm quy định bảo vệ dữ liệu cá nhân, phải thông báo trong thời hạn bao lâu?",production,5,5,5,5,5
+Cơ quan chuyên trách bảo vệ dữ liệu cá nhân là cơ quan nào?,baseline,5,5,5,5,5
+Cơ quan chuyên trách bảo vệ dữ liệu cá nhân là cơ quan nào?,production,5,5,5,5,5
+Công ty trong tờ khai thuế GTGT là công ty nào?,baseline,5,5,5,5,5
+Công ty trong tờ khai thuế GTGT là công ty nào?,production,5,5,5,5,5
+Mã số thuế của Công ty Cổ phần DHA Surfaces là bao nhiêu?,baseline,5,5,5,5,5
+Mã số thuế của Công ty Cổ phần DHA Surfaces là bao nhiêu?,production,5,5,5,5,5
+Kỳ tính thuế trong tờ khai thuế GTGT của DHA Surfaces là kỳ nào?,baseline,5,5,5,5,5
+Kỳ tính thuế trong tờ khai thuế GTGT của DHA Surfaces là kỳ nào?,production,5,5,5,5,5
+Thuế giá trị gia tăng còn được khấu trừ kỳ trước chuyển sang của DHA Surfaces là bao nhiêu?,baseline,3,2,5,4,3
+Thuế giá trị gia tăng còn được khấu trừ kỳ trước chuyển sang của DHA Surfaces là bao nhiêu?,production,5,5,5,5,5
+Thuế giá trị gia tăng còn phải nộp trong kỳ của DHA Surfaces là bao nhiêu?,baseline,3,2,5,4,3
+Thuế giá trị gia tăng còn phải nộp trong kỳ của DHA Surfaces là bao nhiêu?,production,5,5,5,5,5
+Bảo vệ dữ liệu cá nhân được định nghĩa như thế nào?,baseline,5,5,5,5,5
+Bảo vệ dữ liệu cá nhân được định nghĩa như thế nào?,production,5,5,5,5,5
+Xử lý dữ liệu cá nhân bao gồm những hoạt động nào?,baseline,5,5,5,5,5
+Xử lý dữ liệu cá nhân bao gồm những hoạt động nào?,production,5,4,5,5,5
+Tổng doanh thu hàng hóa dịch vụ bán ra của DHA Surfaces là bao nhiêu?,baseline,2,2,5,3,2
+Tổng doanh thu hàng hóa dịch vụ bán ra của DHA Surfaces là bao nhiêu?,production,5,5,5,5,5
+Thuế GTGT của hàng hóa mua vào trong kỳ là bao nhiêu?,baseline,4,3,5,4,4
+Thuế GTGT của hàng hóa mua vào trong kỳ là bao nhiêu?,production,5,5,5,5,5
+Hàng hóa bán ra chịu thuế suất 10% có giá trị bao nhiêu?,baseline,1,1,5,3,2
+Hàng hóa bán ra chịu thuế suất 10% có giá trị bao nhiêu?,production,1,1,2,4,1
+"So sánh quyền và nghĩa vụ của chủ thể dữ liệu theo Nghị định 13, quyền nào có thể bị hạn chế?",baseline,5,4,5,5,4
+"So sánh quyền và nghĩa vụ của chủ thể dữ liệu theo Nghị định 13, quyền nào có thể bị hạn chế?",production,3,3,3,3,3
+Tại sao Nghị định 13 quy định thời hạn 72 giờ cho nhiều hoạt động khác nhau?,baseline,5,4,5,5,4
+Tại sao Nghị định 13 quy định thời hạn 72 giờ cho nhiều hoạt động khác nhau?,production,5,5,5,5,5
+"Điểm khác biệt giữa Bên Kiểm soát, Bên Xử lý, và Bên Kiểm soát và xử lý dữ liệu cá nhân là gì?",baseline,5,2,5,5,3
+"Điểm khác biệt giữa Bên Kiểm soát, Bên Xử lý, và Bên Kiểm soát và xử lý dữ liệu cá nhân là gì?",production,5,5,5,5,5
+Thuế GTGT phát sinh trong kỳ được tính như thế nào từ các chỉ tiêu trong tờ khai?,baseline,3,2,5,4,3
+Thuế GTGT phát sinh trong kỳ được tính như thế nào từ các chỉ tiêu trong tờ khai?,production,3,3,3,3,3
+"Từ tờ khai thuế, DHA Surfaces có lãi hay lỗ trong hoạt động kinh doanh Quý 4/2024?",baseline,4,2,5,3,3
+"Từ tờ khai thuế, DHA Surfaces có lãi hay lỗ trong hoạt động kinh doanh Quý 4/2024?",production,3,3,4,4,3

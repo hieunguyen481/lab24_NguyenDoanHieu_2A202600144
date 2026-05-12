@@ -160,19 +160,143 @@ def failure_analysis(eval_results: list[EvalResult], bottom_n: int = 10) -> list
     return failures
 
 
-def save_report(results: dict, failures: list[dict], path: str = "ragas_report.json"):
+def save_report(results: dict, failures: list[dict], path: str = "reports/ragas_report.json"):
     """Save evaluation report to JSON. (Đã implement sẵn)"""
+    import csv
     report = {
         "aggregate": {k: v for k, v in results.items() if k != "per_question"},
         "num_questions": len(results.get("per_question", [])),
         "failures": failures,
     }
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
     print(f"Report saved to {path}")
+
+    # For Phase A Lab 24 rubric specifically
+    os.makedirs("phase-a", exist_ok=True)
+    with open("phase-a/ragas_summary.json", "w", encoding="utf-8") as f:
+        json.dump(report["aggregate"], f, ensure_ascii=False, indent=2)
+    print("Report summary saved to phase-a/ragas_summary.json")
+
+    with open("phase-a/ragas_results.csv", "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=[
+            "question", "answer", "contexts", "ground_truth",
+            "faithfulness", "answer_relevancy", "context_precision", "context_recall"
+        ])
+        writer.writeheader()
+        for res in results.get("per_question", []):
+            writer.writerow({
+                "question": res.question,
+                "answer": res.answer,
+                "contexts": str(res.contexts),
+                "ground_truth": res.ground_truth,
+                "faithfulness": res.faithfulness,
+                "answer_relevancy": res.answer_relevancy,
+                "context_precision": res.context_precision,
+                "context_recall": res.context_recall
+            })
+    print("Report results saved to phase-a/ragas_results.csv")
 
 
 if __name__ == "__main__":
     test_set = load_test_set()
     print(f"Loaded {len(test_set)} test questions")
     print("Run pipeline.py first to generate answers, then call evaluate_ragas().")
+
+
+def failure_cluster_analysis(eval_results: list[EvalResult]) -> dict:
+    """
+    Cluster failures into diagnostic groups with statistics.
+    
+    Clusters:
+      - retrieval_gap: context_recall < 0.75
+      - precision_noise: context_precision < 0.75
+      - hallucination: faithfulness < 0.85
+      - irrelevance: answer_relevancy < 0.80
+    """
+    clusters = {
+        "retrieval_gap": {"threshold": 0.75, "metric": "context_recall", "items": []},
+        "precision_noise": {"threshold": 0.75, "metric": "context_precision", "items": []},
+        "hallucination": {"threshold": 0.85, "metric": "faithfulness", "items": []},
+        "irrelevance": {"threshold": 0.80, "metric": "answer_relevancy", "items": []},
+    }
+
+    for r in eval_results:
+        scores = {
+            "faithfulness": r.faithfulness if r.faithfulness == r.faithfulness else 0.0,
+            "answer_relevancy": r.answer_relevancy if r.answer_relevancy == r.answer_relevancy else 0.0,
+            "context_precision": r.context_precision if r.context_precision == r.context_precision else 0.0,
+            "context_recall": r.context_recall if r.context_recall == r.context_recall else 0.0,
+        }
+        for cluster_name, info in clusters.items():
+            metric_val = scores[info["metric"]]
+            if metric_val < info["threshold"]:
+                info["items"].append({
+                    "question": r.question,
+                    "score": metric_val,
+                    "all_scores": scores,
+                })
+
+    # Build summary
+    summary = {}
+    for name, info in clusters.items():
+        items = info["items"]
+        n = len(items)
+        if n > 0:
+            avg = sum(it["score"] for it in items) / n
+            worst = min(items, key=lambda x: x["score"])
+        else:
+            avg = 0.0
+            worst = None
+        summary[name] = {
+            "count": n,
+            "avg_score": round(avg, 4) if n > 0 else None,
+            "worst_question": worst["question"] if worst else None,
+            "worst_score": worst["score"] if worst else None,
+            "pct_of_total": round(n / max(len(eval_results), 1) * 100, 1),
+        }
+
+    return summary
+
+
+def generate_cluster_report(cluster_summary: dict, eval_results: list[EvalResult],
+                            path: str = "reports/cluster_analysis.json"):
+    """Generate and save cluster analysis report."""
+    import json as _json
+
+    total = len(eval_results)
+    overall = {}
+    for m in ["faithfulness", "answer_relevancy", "context_precision", "context_recall"]:
+        vals = [getattr(r, m) for r in eval_results if getattr(r, m) == getattr(r, m)]
+        overall[m] = round(sum(vals) / max(len(vals), 1), 4) if vals else 0.0
+
+    report = {
+        "total_questions": total,
+        "overall_scores": overall,
+        "clusters": cluster_summary,
+        "recommendations": [],
+    }
+
+    # Auto recommendations
+    for name, info in cluster_summary.items():
+        if info["count"] > 0:
+            pct = info["pct_of_total"]
+            if name == "retrieval_gap":
+                report["recommendations"].append(
+                    f"{pct}% questions have retrieval gaps. Consider: improve chunking, add BM25, increase RERANK_TOP_K.")
+            elif name == "precision_noise":
+                report["recommendations"].append(
+                    f"{pct}% questions have noisy context. Consider: stricter reranking, metadata filtering.")
+            elif name == "hallucination":
+                report["recommendations"].append(
+                    f"{pct}% questions show hallucination. Consider: tighter prompt, lower temperature, add citations.")
+            elif name == "irrelevance":
+                report["recommendations"].append(
+                    f"{pct}% questions have irrelevant answers. Consider: improve prompt template, add query rewriting.")
+
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        _json.dump(report, f, ensure_ascii=False, indent=2)
+    print(f"Cluster analysis saved to {path}")
+    return report
